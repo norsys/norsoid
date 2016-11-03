@@ -1,0 +1,26 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+version = '1.0.0'
+group = 'fr.norsys.android.norsoid'
+
+uploadArchives {
+    repositories {
+        mavenDeployer { repository(url: 'file:///Users/mehdibrahmi/.m2/repository') }
+        mavenDeployer {
+            repository(url: 'https://nexus.norsys.fr/content/repositories/Norsys/') {
+                authentication(userName: nexusNorsysUser, password: nexusNorsysPassword)
+            }
+        }
+    }
+}
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+    compile 'com.android.tools.build:gradle:2.2.2'
+    compile 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+}
+
+// Make sure all code is compiled, tested and checked before uploadArchives.
+uploadArchives.dependsOn 'build'
