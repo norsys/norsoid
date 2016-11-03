@@ -1,6 +1,6 @@
 buildscript {
     dependencies {
-        classpath 'fr.norsys.android.norsoid:norsoid-plugin:1.0.0'
+        classpath 'fr.norsys.android.norsoid:norsoid-plugin:1.0.1'
     }
 }
 
