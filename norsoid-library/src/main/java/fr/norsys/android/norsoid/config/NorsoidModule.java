@@ -9,6 +9,7 @@ import dagger.Module;
 import dagger.Provides;
 import fr.norsys.android.norsoid.manager.SharedPreferencesManager;
 import fr.norsys.android.norsoid.manager.impl.SharedPreferencesManagerImpl;
+import io.realm.Realm;
 
 @Module
 public class NorsoidModule {
@@ -27,6 +28,11 @@ public class NorsoidModule {
     @Provides
     public Context provideContext() {
         return this.mApplication.getApplicationContext();
+    }
+
+    @Provides
+    public Realm provideRealm() {
+        return Realm.getDefaultInstance();
     }
 
     @Provides

@@ -1,7 +1,7 @@
 package fr.norsys.android.norsoid.sample.manager.impl;
 
 import fr.norsys.android.norsoid.sample.manager.PostManager;
-import fr.norsys.android.norsoid.sample.post.Post;
+import fr.norsys.android.norsoid.sample.model.Post;
 import fr.norsys.android.norsoid.sample.service.PostService;
 import fr.norsys.android.norsoid.service.ServiceCallBack;
 import retrofit2.Call;

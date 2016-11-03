@@ -1,4 +1,4 @@
-package fr.norsys.android.norsoid.sample.post;
+package fr.norsys.android.norsoid.sample.model;
 
 
 public class Post {
