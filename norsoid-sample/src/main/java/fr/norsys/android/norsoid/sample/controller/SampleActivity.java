@@ -43,6 +43,9 @@ public class SampleActivity extends NorsoidActivity {
 
     private Unbinder unbinder;
 
+    @Inject
+    Realm mRealm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +70,7 @@ public class SampleActivity extends NorsoidActivity {
             }
         });
 
-        realmTransaction(new RealmUtil.Transaction() {
+        mRealm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
                 User user = realm.where(User.class).findFirst();
@@ -84,13 +87,14 @@ public class SampleActivity extends NorsoidActivity {
     @OnClick(R.id.saveUsername)
     public void onSaveUsernameClick() {
         final User user = new User(mEtUserName.getText().toString(), mEtPassword.getText().toString());
-        realmTransaction(new RealmUtil.Transaction() {
+        mRealm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
                 realm.delete(User.class);
                 realm.copyToRealm(user);
             }
         });
+
     }
 
 
