@@ -19,7 +19,10 @@ import fr.norsys.android.norsoid.sample.manager.PostManager;
 import fr.norsys.android.norsoid.sample.model.Post;
 import fr.norsys.android.norsoid.sample.model.User;
 import fr.norsys.android.norsoid.service.ServiceCallBack;
+import fr.norsys.android.norsoid.util.RealmUtil;
 import io.realm.Realm;
+
+import static fr.norsys.android.norsoid.util.RealmUtil.realmTransaction;
 
 public class SampleActivity extends NorsoidActivity {
 
@@ -40,16 +43,12 @@ public class SampleActivity extends NorsoidActivity {
 
     private Unbinder unbinder;
 
-    @Inject
-    Realm mRealm;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         SampleApplication.app().inject(this);
         setContentView(R.layout.activity_sample);
-        mRealm = Realm.getDefaultInstance();
         unbinder = ButterKnife.bind(this);
         mSharedPreferencesManager.putString("sampleKey", "Hello World !");
         Toast.makeText(mContext, mSharedPreferencesManager.getString("sampleKey", "sharedPreferences error"), Toast.LENGTH_SHORT).show();
@@ -68,8 +67,7 @@ public class SampleActivity extends NorsoidActivity {
             }
         });
 
-
-        mRealm.executeTransaction(new Realm.Transaction() {
+        realmTransaction(new RealmUtil.Transaction() {
             @Override
             public void execute(Realm realm) {
                 User user = realm.where(User.class).findFirst();
@@ -80,18 +78,19 @@ public class SampleActivity extends NorsoidActivity {
             }
         });
 
-
     }
 
 
     @OnClick(R.id.saveUsername)
     public void onSaveUsernameClick() {
-        User user = new User(mEtUserName.getText().toString(), mEtPassword.getText().toString());
-        mRealm.beginTransaction();
-        mRealm.delete(User.class);
-        mRealm.copyToRealm(user);
-        mRealm.commitTransaction();
-
+        final User user = new User(mEtUserName.getText().toString(), mEtPassword.getText().toString());
+        realmTransaction(new RealmUtil.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                realm.delete(User.class);
+                realm.copyToRealm(user);
+            }
+        });
     }
 
 

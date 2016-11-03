@@ -11,7 +11,7 @@ apply plugin: 'maven'
 apply plugin: 'realm-android'
 
 group = 'fr.norsys.android.norsoid'
-version = '1.0.1'
+version = '1.0.0'
 
 uploadArchives {
     repositories {

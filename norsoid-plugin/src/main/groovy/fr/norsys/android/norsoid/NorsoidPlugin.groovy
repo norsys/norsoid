@@ -13,14 +13,12 @@ class NorsoidPlugin implements Plugin<Project> {
         if (!hasApp && !hasLib) {
             throw new IllegalStateException("'android' or 'android-library' plugin required.")
         }
-
         project.pluginManager.apply('com.neenbedankt.android-apt')
         project.pluginManager.apply('realm-android')
 
         project.android.lintOptions {
             disable 'InvalidPackage'
         }
-
         project.dependencies {
             compile 'fr.norsys.android.norsoid:norsoid-library:1.0.0'
             apt 'fr.norsys.android.norsoid:norsoid-library:1.0.0'

@@ -6,7 +6,6 @@ import fr.norsys.android.norsoid.config.NorsoidComponent;
 import fr.norsys.android.norsoid.config.NorsoidModule;
 import fr.norsys.android.norsoid.sample.controller.SampleActivity;
 import fr.norsys.android.norsoid.sample.manager.PostManager;
-import io.realm.Realm;
 
 @Component(modules = {
         NorsoidModule.class,
