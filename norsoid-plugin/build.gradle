@@ -1,7 +1,14 @@
+buildscript {
+    dependencies {
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath "io.realm:realm-gradle-plugin:2.1.1"
+    }
+}
+
 apply plugin: 'groovy'
 apply plugin: 'maven'
 
-version = '1.0.0'
+version = '1.0.1'
 group = 'fr.norsys.android.norsoid'
 
 uploadArchives {
@@ -20,6 +27,7 @@ dependencies {
     compile localGroovy()
     compile 'com.android.tools.build:gradle:2.2.2'
     compile 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+    compile 'io.realm:realm-gradle-plugin:2.1.1'
 }
 
 // Make sure all code is compiled, tested and checked before uploadArchives.

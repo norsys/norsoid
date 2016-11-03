@@ -32,6 +32,7 @@ public class SampleActivity extends NorsoidActivity {
         setContentView(R.layout.activity_sample);
         mSharedPreferencesManager.putString("sampleKey", "Hello World !");
         Toast.makeText(mContext, mSharedPreferencesManager.getString("sampleKey", "sharedPreferences error"), Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, mSharedPreferencesManager.getString("sampleKeyError", "sharedPreferences error"), Toast.LENGTH_SHORT).show();
 
         mPostManager.getPost("1", new ServiceCallBack<Post>() {
             @Override

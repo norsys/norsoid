@@ -4,6 +4,8 @@ import android.app.Application;
 
 import java.lang.reflect.Method;
 
+import io.realm.Realm;
+
 
 public class NorsoidApplication extends Application {
 
@@ -19,6 +21,9 @@ public class NorsoidApplication extends Application {
     public void onCreate() {
         super.onCreate();
         sApplication = this;
+
+        // Initialize Realm. Should only be done once when the application starts.
+        Realm.init(this);
     }
 
     public static NorsoidApplication app() {

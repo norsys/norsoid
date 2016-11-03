@@ -15,6 +15,8 @@ class NorsoidPlugin implements Plugin<Project> {
         }
 
         project.pluginManager.apply('com.neenbedankt.android-apt')
+        project.pluginManager.apply('realm-android')
+
         project.dependencies {
             compile 'fr.norsys.android.norsoid:norsoid-library:1.0.0'
             apt 'fr.norsys.android.norsoid:norsoid-library:1.0.0'

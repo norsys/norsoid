@@ -1,20 +1,8 @@
 buildscript {
-    repositories {
-        mavenLocal()
-        maven {
-            url 'https://nexus.norsys.fr/content/repositories/Norsys/'
-            credentials {
-                username "$nexusNorsysUser"
-                password "$nexusNorsysPassword"
-            }
-        }
-        jcenter()
-    }
     dependencies {
         classpath 'fr.norsys.android.norsoid:norsoid-plugin:1.0.0'
     }
 }
-
 
 
 apply plugin: 'com.android.application'

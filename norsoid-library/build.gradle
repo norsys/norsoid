@@ -1,14 +1,20 @@
+buildscript {
+    dependencies {
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath "io.realm:realm-gradle-plugin:2.1.1"
+    }
+}
+
 apply plugin: 'com.android.library'
-//apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'maven'
+apply plugin: 'realm-android'
 
 group = 'fr.norsys.android.norsoid'
-version = '1.0.0'
+version = '1.0.1'
 
 uploadArchives {
     repositories {
-        mavenDeployer { repository(url: 'file:///Users/mehdibrahmi/.m2/repository') }
         mavenDeployer { repository(url: 'https://nexus.norsys.fr/content/repositories/Norsys/') {
             authentication(userName: nexusNorsysUser, password: nexusNorsysPassword)
           }
@@ -40,9 +46,6 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
 
     // Support
     compile 'com.android.support:appcompat-v7:25.0.0'
@@ -50,8 +53,6 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.0.0'
     compile 'com.android.support:cardview-v7:25.0.0'
     compile 'com.android.support:design:25.0.0'
-
-    testCompile "junit:junit:4.12"
 
     // Dagger 2
     compile 'com.google.dagger:dagger:2.7'
@@ -70,4 +71,11 @@ dependencies {
 
     // Gson
     compile 'com.google.code.gson:gson:2.8.0'
+
+
+    testCompile "junit:junit:4.12"
+
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
 }
