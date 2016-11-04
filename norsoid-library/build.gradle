@@ -17,9 +17,10 @@ uploadArchives {
     repositories {
         // TODO :  uniquement pour les tests en local
         //mavenDeployer { repository(url: 'file:///Users/mehdibrahmi/.m2/repository') }
-        mavenDeployer { repository(url: NORSYS_REPOSITORY_URL) {
-            authentication(userName: nexusNorsysUser, password: nexusNorsysPassword)
-          }
+        mavenDeployer {
+            repository(url: NORSYS_REPOSITORY_URL) {
+                authentication(userName: nexusNorsysUser, password: nexusNorsysPassword)
+            }
         }
     }
 }
