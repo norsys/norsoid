@@ -17,7 +17,7 @@ public class MainActivity extends NorsoidActivity {
     }
 
 
-    @OnClick({R.id.btnSampleActivity, R.id.btnSampleTabActivity})
+    @OnClick({R.id.btnSampleActivity, R.id.btnSampleTabActivity, R.id.btnSampleContactActivity})
     public void onBtnClick(View v) {
         switch (v.getId()) {
             case R.id.btnSampleActivity:
@@ -25,6 +25,9 @@ public class MainActivity extends NorsoidActivity {
                 break;
             case R.id.btnSampleTabActivity:
                 startActivity(new Intent(this, SampleTabActivity.class));
+                break;
+            case R.id.btnSampleContactActivity:
+                startActivity(new Intent(this, ContactActivity.class));
                 break;
         }
     }

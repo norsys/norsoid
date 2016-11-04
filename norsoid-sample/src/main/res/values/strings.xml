@@ -8,4 +8,6 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="sample_activity">sample activity</string>
     <string name="sample_tab_activity">sample tab activity</string>
+    <string name="sample_contact_activity">sample contact activity</string>
+    <string name="addContact">Add</string>
 </resources>

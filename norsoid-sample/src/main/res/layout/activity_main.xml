@@ -24,6 +24,15 @@
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:text="@string/sample_activity"/>
 
+    <Button
+        android:id="@+id/btnSampleContactActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="@string/sample_contact_activity"/>
 
     <Button
         android:id="@+id/btnSampleTabActivity"
