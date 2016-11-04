@@ -6,16 +6,13 @@ import java.lang.reflect.Method;
 
 import io.realm.Realm;
 
-
 public class NorsoidApplication extends Application {
 
     protected NorsoidComponent mNorsoidComponent;
 
     protected static NorsoidApplication sApplication;
 
-
-    public NorsoidApplication() {
-    }
+    public NorsoidApplication() {}
 
     @Override
     public void onCreate() {
@@ -34,7 +31,6 @@ public class NorsoidApplication extends Application {
         if(this.mNorsoidComponent == null) {
             this.mNorsoidComponent = this.createNorsoidComponent();
         }
-
         return this.mNorsoidComponent;
     }
 
@@ -61,6 +57,5 @@ public class NorsoidApplication extends Application {
         } catch (Exception var6) {
             throw new RuntimeException("Can\'t inject in " + obj.getClass() + "  with your BaseComponent ", var6);
         }
-
     }
 }

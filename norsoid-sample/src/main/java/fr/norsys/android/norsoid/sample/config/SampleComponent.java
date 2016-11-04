@@ -4,7 +4,10 @@ package fr.norsys.android.norsoid.sample.config;
 import dagger.Component;
 import fr.norsys.android.norsoid.config.NorsoidComponent;
 import fr.norsys.android.norsoid.config.NorsoidModule;
+import fr.norsys.android.norsoid.manager.SharedPreferencesManager;
+import fr.norsys.android.norsoid.sample.controller.PlaceholderFragment;
 import fr.norsys.android.norsoid.sample.controller.SampleActivity;
+import fr.norsys.android.norsoid.sample.controller.MainActivity;
 import fr.norsys.android.norsoid.sample.manager.PostManager;
 
 @Component(modules = {
@@ -13,8 +16,8 @@ import fr.norsys.android.norsoid.sample.manager.PostManager;
 })
 public interface SampleComponent extends NorsoidComponent {
 
-    PostManager postManager();
-
+    void inject(MainActivity mainActivity);
     void inject(SampleActivity sampleActivity);
+    void inject(PlaceholderFragment placeholderFragment);
 
 }

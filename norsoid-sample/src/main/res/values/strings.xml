@@ -1,6 +1,11 @@
 <resources>
-    <string name="app_name">Sample</string>
+    <string name="app_name">NorsoidSample</string>
     <string name="identifiant">Identifiant</string>
     <string name="mot_de_passe">Mot de passe</string>
     <string name="enregistrer_identifiant">Enregistrer identifiant</string>
+    <string name="title_activity_sample_tab">SampleTabActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="sample_activity">sample activity</string>
+    <string name="sample_tab_activity">sample tab activity</string>
 </resources>

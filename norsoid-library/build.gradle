@@ -1,7 +1,7 @@
 buildscript {
     dependencies {
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
-        classpath "io.realm:realm-gradle-plugin:2.1.1"
+        classpath "com.neenbedankt.gradle.plugins:android-apt:$APT_VERSION"
+        classpath "io.realm:realm-gradle-plugin:$REALM_VERSION"
     }
 }
 
@@ -10,12 +10,14 @@ apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'maven'
 apply plugin: 'realm-android'
 
-group = 'fr.norsys.android.norsoid'
-version = '1.0.0'
+group = NORSOID_GROUP
+version = NORSOID_VERSION
 
 uploadArchives {
     repositories {
-        mavenDeployer { repository(url: 'https://nexus.norsys.fr/content/repositories/Norsys/') {
+        // TODO :  uniquement pour les tests en local
+        //mavenDeployer { repository(url: 'file:///Users/mehdibrahmi/.m2/repository') }
+        mavenDeployer { repository(url: NORSYS_REPOSITORY_URL) {
             authentication(userName: nexusNorsysUser, password: nexusNorsysPassword)
           }
         }
@@ -23,14 +25,14 @@ uploadArchives {
 }
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "24.0.3"
+    compileSdkVersion Integer.parseInt(NORSOID_COMPILE_SDK_VERSION)
+    buildToolsVersion NORSOID_BUILD_TOOLS
 
     defaultConfig {
-        minSdkVersion 17
-        targetSdkVersion 25
-        versionCode 1
-        versionName "$version"
+        minSdkVersion Integer.parseInt(NORSOID_MIN_SDK)
+        targetSdkVersion Integer.parseInt(NORSOID_TARGET_SDK)
+        versionCode Integer.parseInt(NORSOID_CODE)
+        versionName NORSOID_VERSION
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -53,30 +55,36 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     // Support
-    compile 'com.android.support:appcompat-v7:25.0.0'
-    compile 'com.android.support:support-v4:25.0.0'
-    compile 'com.android.support:recyclerview-v7:25.0.0'
-    compile 'com.android.support:cardview-v7:25.0.0'
-    compile 'com.android.support:design:25.0.0'
+    compile "com.android.support:appcompat-v7:$SUPPORT_VERSION"
+    compile "com.android.support:support-v4:$SUPPORT_VERSION"
+    compile "com.android.support:recyclerview-v7:$SUPPORT_VERSION"
+    compile "com.android.support:cardview-v7:$SUPPORT_VERSION"
+    compile "com.android.support:design:$SUPPORT_VERSION"
 
     // Dagger 2
-    compile 'com.google.dagger:dagger:2.7'
-    apt 'com.google.dagger:dagger-compiler:2.7'
+    compile "com.google.dagger:dagger:$DAGGER_VERSION"
+    apt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
 
     // Retrofit 2
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
+    compile "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
 
     // Butter Knife
-    compile 'com.jakewharton:butterknife:8.4.0'
-    apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
+    apt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
+
+    // EventBus
+    compile "org.greenrobot:eventbus:$EVENTBUS_VERSION"
 
     // Glide
-    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile "com.github.bumptech.glide:glide:$GLIDE_VERSION"
 
     // Gson
-    compile 'com.google.code.gson:gson:2.8.0'
+    compile "com.google.code.gson:gson:$GSON_VERSION"
 
+    // Lombok
+    provided "org.projectlombok:lombok:$LOMBOK_VERSION"
+    apt "org.projectlombok:lombok:$LOMBOK_VERSION"
 
     testCompile "junit:junit:4.12"
 

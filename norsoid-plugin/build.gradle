@@ -1,22 +1,23 @@
 buildscript {
     dependencies {
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
-        classpath "io.realm:realm-gradle-plugin:2.1.1"
+        classpath "com.neenbedankt.gradle.plugins:android-apt:$APT_VERSION"
+        classpath "io.realm:realm-gradle-plugin:$REALM_VERSION"
     }
 }
 
 apply plugin: 'groovy'
 apply plugin: 'maven'
 
-version = '1.0.0'
-group = 'fr.norsys.android.norsoid'
+version = NORSOID_VERSION
+group = NORSOID_GROUP
 
 uploadArchives {
     repositories {
-        mavenDeployer {
-            repository(url: 'https://nexus.norsys.fr/content/repositories/Norsys/') {
-                authentication(userName: nexusNorsysUser, password: nexusNorsysPassword)
-            }
+        // TODO :  uniquement pour les tests en local
+        //mavenDeployer { repository(url: 'file:///Users/mehdibrahmi/.m2/repository') }
+        mavenDeployer { repository(url: NORSYS_REPOSITORY_URL) {
+            authentication(userName: nexusNorsysUser, password: nexusNorsysPassword)
+        }
         }
     }
 }
@@ -24,9 +25,9 @@ uploadArchives {
 dependencies {
     compile gradleApi()
     compile localGroovy()
-    compile 'com.android.tools.build:gradle:2.2.2'
-    compile 'com.neenbedankt.gradle.plugins:android-apt:1.8'
-    compile 'io.realm:realm-gradle-plugin:2.1.1'
+    compile "com.android.tools.build:gradle:$GRADLE_ANDROID_VERSION"
+    compile "com.neenbedankt.gradle.plugins:android-apt:$APT_VERSION"
+    compile "io.realm:realm-gradle-plugin:$REALM_VERSION"
 }
 
 // Make sure all code is compiled, tested and checked before uploadArchives.

@@ -4,19 +4,25 @@
           package="fr.norsys.android.norsoid.sample">
 
     <application
-        tools:replace="android:name"
         android:name=".config.SampleApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".controller.SampleActivity">
+        android:theme="@style/AppTheme"
+        tools:replace="android:name">
+        <activity android:name=".controller.SampleActivity"/>
+        <activity android:name=".controller.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".controller.SampleTabActivity"
+            android:label="@string/title_activity_sample_tab"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 

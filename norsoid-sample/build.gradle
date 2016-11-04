@@ -1,12 +1,13 @@
 buildscript {
     dependencies {
-        classpath 'fr.norsys.android.norsoid:norsoid-plugin:1.0.0'
+        classpath 'fr.norsys.android.norsoid:norsoid-plugin:1.0.1'
     }
 }
 
 
 apply plugin: 'com.android.application'
-apply plugin: 'norsoid-plugin'
+//apply plugin: 'norsoid-plugin'
+apply plugin: 'fr.norsys.android.norsoid'
 
 android {
     compileSdkVersion 25

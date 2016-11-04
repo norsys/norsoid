@@ -1,20 +1,18 @@
 package fr.norsys.android.norsoid.config;
 
 
-import android.app.Application;
-import android.content.Context;
-
 import dagger.Component;
-import fr.norsys.android.norsoid.manager.SharedPreferencesManager;
-import io.realm.Realm;
+import fr.norsys.android.norsoid.controller.NorsoidActivity;
+import fr.norsys.android.norsoid.controller.NorsoidFragment;
+import fr.norsys.android.norsoid.controller.NorsoidViewHolder;
 
 @Component(modules = { NorsoidModule.class })
 public interface NorsoidComponent {
 
-    Context context();
-    Application application();
-    Realm realm();
+    void inject(NorsoidActivity norsoidActivity);
 
-    SharedPreferencesManager sharedPreferencesManager();
+    void inject(NorsoidFragment norsoidFragment);
+
+    void inject(NorsoidViewHolder norsoidViewHolder);
 
 }

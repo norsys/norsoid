@@ -19,13 +19,14 @@ class NorsoidPlugin implements Plugin<Project> {
         project.android.lintOptions {
             disable 'InvalidPackage'
         }
+
         project.dependencies {
-            compile 'fr.norsys.android.norsoid:norsoid-library:1.0.0'
-            apt 'fr.norsys.android.norsoid:norsoid-library:1.0.0'
-            apt 'com.google.dagger:dagger-compiler:2.7'
-            apt 'com.jakewharton:butterknife-compiler:8.4.0'
+            compile "fr.norsys.android.norsoid:norsoid-library:$project.NORSOID_VERSION"
+            apt "fr.norsys.android.norsoid:norsoid-library:$project.NORSOID_VERSION"
+            apt "com.google.dagger:dagger-compiler:$project.DAGGER_VERSION"
+            apt "com.jakewharton:butterknife-compiler:$project.BUTTERKNIFE_VERSION"
+            provided "org.projectlombok:lombok:$project.LOMBOK_VERSION"
+            apt "org.projectlombok:lombok:$project.LOMBOK_VERSION"
         }
-
-
     }
 }
