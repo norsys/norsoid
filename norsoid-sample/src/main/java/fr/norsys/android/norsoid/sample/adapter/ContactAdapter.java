@@ -18,11 +18,14 @@ import fr.norsys.android.norsoid.sample.model.Contact;
 
 public class ContactAdapter extends RecyclerView.Adapter<ContactHolder> implements Filterable {
 
-    List<Contact> listContact;
+    List<Contact> listContact, listContactFiltered;
+    ContactFilter contactFilter;
 
 
     public ContactAdapter(List<Contact> listContact){
         this.listContact = listContact;
+        this.listContactFiltered = listContact;
+        this.contactFilter = new ContactFilter(this, listContact);
     }
 
     @Override
@@ -33,18 +36,22 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactHolder> implemen
 
     @Override
     public void onBindViewHolder(ContactHolder contactHolder, int position) {
-        Contact contact = listContact.get(position);
+        Contact contact = listContactFiltered.get(position);
         contactHolder.bind(contact);
     }
 
     @Override
     public int getItemCount() {
-        return listContact.size();
+        return listContactFiltered.size();
     }
 
 
     @Override
     public Filter getFilter() {
-        return new ContactFilter(this, listContact);
+        return contactFilter;
+    }
+
+    protected void setListContactFiltered(List<Contact> listContactFiltered) {
+        this.listContactFiltered = listContactFiltered;
     }
 }

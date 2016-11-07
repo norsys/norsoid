@@ -51,8 +51,7 @@ public class ContactFilter extends Filter {
     @Override
     protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
 
-        contactAdapter.listContact.clear();
-        contactAdapter.listContact.addAll((ArrayList<Contact>) filterResults.values);
+        contactAdapter.setListContactFiltered((ArrayList<Contact>) filterResults.values);
         contactAdapter.notifyDataSetChanged();
 
     }
