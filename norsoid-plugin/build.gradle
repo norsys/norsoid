@@ -5,6 +5,7 @@ buildscript {
     }
 }
 
+
 apply plugin: 'groovy'
 apply plugin: 'maven'
 
@@ -20,9 +21,32 @@ uploadArchives {
                 authentication(userName: nexusNorsysUser, password: nexusNorsysPassword)
             }
         }
-
     }
 }
+
+
+ext.norsoidProps = new Properties()
+ext.norsoidProps.load(new FileInputStream(file("${project.rootDir}/norsoid.properties")))
+
+
+sourceSets {
+    main {
+        groovy {
+            srcDirs 'src'
+            srcDirs 'build/gen'
+        }
+    }
+}
+
+task generateNorsoidConstants(type: Copy) {
+    from 'src/templates'
+    into "${project.buildDir}/gen/main/groovy/fr/norsys/android/norsoid"
+    include 'NorsoidConstants.groovy.template'
+    rename { file -> 'NorsoidConstants.groovy' }
+    expand(project: project, title: 'Norsoid Constants', generated: new Date())
+}
+assemble.dependsOn generateNorsoidConstants
+
 
 dependencies {
     compile gradleApi()
@@ -33,4 +57,4 @@ dependencies {
 }
 
 // Make sure all code is compiled, tested and checked before uploadArchives.
-uploadArchives.dependsOn 'build'
+uploadArchives.dependsOn build

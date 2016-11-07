@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
     <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".config.SampleApplication"
@@ -19,7 +20,6 @@
         <activity android:name=".controller.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -28,6 +28,9 @@
             android:label="@string/title_activity_sample_tab"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="2c74cfadd4a9a1aaa90730ad8ca8e8e8a1364dd1" />
     </application>
 
 </manifest>

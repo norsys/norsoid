@@ -13,20 +13,29 @@ class NorsoidPlugin implements Plugin<Project> {
         if (!hasApp && !hasLib) {
             throw new IllegalStateException("'android' or 'android-library' plugin required.")
         }
-        project.pluginManager.apply('com.neenbedankt.android-apt')
-        project.pluginManager.apply('realm-android')
+
+        project.plugins.apply('com.neenbedankt.android-apt')
+        project.plugins.apply('realm-android')
 
         project.android.lintOptions {
             disable 'InvalidPackage'
         }
-
         project.dependencies {
-            compile "fr.norsys.android.norsoid:norsoid-library:$project.NORSOID_VERSION"
-            apt "fr.norsys.android.norsoid:norsoid-library:$project.NORSOID_VERSION"
-            apt "com.google.dagger:dagger-compiler:$project.DAGGER_VERSION"
-            apt "com.jakewharton:butterknife-compiler:$project.BUTTERKNIFE_VERSION"
-            provided "org.projectlombok:lombok:$project.LOMBOK_VERSION"
-            apt "org.projectlombok:lombok:$project.LOMBOK_VERSION"
+            compile "fr.norsys.android.norsoid:norsoid-library:${NorsoidConstants.NORSOID_VERSION}"
+            apt "fr.norsys.android.norsoid:norsoid-library:${NorsoidConstants.NORSOID_VERSION}"
+            apt "com.google.dagger:dagger-compiler:${NorsoidConstants.DAGGER_VERSION}"
+            apt "com.jakewharton:butterknife-compiler:${NorsoidConstants.BUTTERKNIFE_VERSION}"
+            provided "org.projectlombok:lombok:${NorsoidConstants.LOMBOK_VERSION}"
+            apt "org.projectlombok:lombok:${NorsoidConstants.LOMBOK_VERSION}"
+        }
+
+        generateLombokConfig(project)
+    }
+
+    public void generateLombokConfig(Project project) {
+        def file = new File("${project.projectDir}/lombok.config")
+        if(!file.exists()) {
+            file.write("lombok.addGeneratedAnnotation = false")
         }
     }
 }

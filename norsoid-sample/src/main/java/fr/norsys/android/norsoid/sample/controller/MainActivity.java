@@ -16,7 +16,6 @@ public class MainActivity extends NorsoidActivity {
         setContentView(R.layout.activity_main);
     }
 
-
     @OnClick({R.id.btnSampleActivity, R.id.btnSampleTabActivity, R.id.btnSampleContactActivity})
     public void onBtnClick(View v) {
         switch (v.getId()) {
