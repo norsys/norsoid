@@ -9,17 +9,23 @@ import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.widget.EditText;
+import android.support.v7.widget.SearchView;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 import fr.norsys.android.norsoid.controller.NorsoidActivity;
 import fr.norsys.android.norsoid.sample.R;
 import fr.norsys.android.norsoid.sample.adapter.ContactAdapter;
@@ -33,21 +39,17 @@ public class ContactActivity extends NorsoidActivity {
 
     public static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
 
-    @BindView(R.id.editContact)
-    EditText mEditText;
-
     @BindView(R.id.listContact)
     RecyclerView mListContact;
 
     List<Contact> listContact = new ArrayList<Contact>();
+    ContactAdapter contactAdapter;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact);
-
-
 
         // Here, thisActivity is the current activity
         if (ContextCompat.checkSelfPermission(this,
@@ -84,6 +86,7 @@ public class ContactActivity extends NorsoidActivity {
             getListContactPhone();
         }
 
+
     }
 
     private void getListContactPhone() {
@@ -110,8 +113,11 @@ public class ContactActivity extends NorsoidActivity {
                 }
             }
         }
+         contactAdapter = new ContactAdapter(listContact);
+
         mListContact.setLayoutManager(new LinearLayoutManager(this));
-        mListContact.setAdapter(new ContactAdapter(listContact));
+        mListContact.setAdapter(contactAdapter);
+        mListContact.setHasFixedSize(true);
 
     }
 
@@ -143,6 +149,36 @@ public class ContactActivity extends NorsoidActivity {
             // other 'case' lines to check for other
             // permissions this app might request
         }
+    }
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_action_search, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+
+                if ( TextUtils.isEmpty ( s ) ) {
+                    contactAdapter.getFilter().filter("");
+                } else {
+                    contactAdapter.getFilter().filter(s.toString());
+                }
+                return true;
+
+            }
+        });
+
+        return true;
     }
 
 
@@ -186,12 +222,12 @@ public class ContactActivity extends NorsoidActivity {
 //        try {
 //            ContentResolver cr = this.getContentResolver();
 //            ContentValues cv = new ContentValues();
-//            cv.put(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME, mEditText.getText().toString());
+//            cv.put(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME, mSearchText.getText().toString());
 //            cv.put(ContactsContract.CommonDataKinds.Phone.NUMBER, "1234567890");
 //            cv.put(ContactsContract.CommonDataKinds.Phone.TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE);
 //            cr.insert(ContactsContract.RawContacts.CONTENT_URI, cv);
 //
-//            Toast.makeText(this, "Contact added "+  mEditText.getText().toString(), Toast.LENGTH_LONG).show();
+//            Toast.makeText(this, "Contact added "+  mSearchText.getText().toString(), Toast.LENGTH_LONG).show();
 //        } catch(Exception e) {
 //
 //            TextView tv = new TextView(this);
