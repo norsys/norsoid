@@ -1,13 +1,16 @@
 package fr.norsys.android.norsoid.sample.adapter;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.norsys.android.norsoid.controller.NorsoidViewHolder;
 import fr.norsys.android.norsoid.sample.R;
+import fr.norsys.android.norsoid.sample.controller.DetailContactActivity;
 import fr.norsys.android.norsoid.sample.model.Contact;
 
 /**
@@ -24,6 +27,19 @@ public class ContactHolder extends NorsoidViewHolder {
 
     public ContactHolder(View itemView) {
         super(itemView);
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(v.getContext(), DetailContactActivity.class);
+                intent.putExtra("CONTACT_NAME", nameTextView.getText().toString());
+                intent.putExtra("CONTACT_PHONE", numberTextView.getText().toString());
+                v.getContext().startActivity(intent);
+
+            }
+        });
     }
 
     public void bind(Contact contact){
