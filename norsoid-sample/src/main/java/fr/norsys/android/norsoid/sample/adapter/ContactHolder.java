@@ -1,13 +1,10 @@
 package fr.norsys.android.norsoid.sample.adapter;
 
 import android.content.Intent;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import fr.norsys.android.norsoid.controller.NorsoidViewHolder;
 import fr.norsys.android.norsoid.sample.R;
 import fr.norsys.android.norsoid.sample.controller.DetailContactActivity;

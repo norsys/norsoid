@@ -1,22 +1,15 @@
 package fr.norsys.android.norsoid.sample.controller;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import butterknife.BindView;
 import fr.norsys.android.norsoid.controller.NorsoidActivity;
@@ -90,7 +83,7 @@ public class DetailContactActivity extends NorsoidActivity {
     }
 
     @Override
-   public void onRequestPermissionsResult(int requestCode,
+    public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_CALL: {
@@ -109,7 +102,6 @@ public class DetailContactActivity extends NorsoidActivity {
 
         }
     }
-
 
 
 }
