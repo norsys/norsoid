@@ -21,6 +21,7 @@ import org.w3c.dom.Text;
 import butterknife.BindView;
 import fr.norsys.android.norsoid.controller.NorsoidActivity;
 import fr.norsys.android.norsoid.sample.R;
+import fr.norsys.android.norsoid.sample.model.Contact;
 
 /**
  * Created by atoumji on 07/11/16.
@@ -38,7 +39,7 @@ public class DetailContactActivity extends NorsoidActivity {
     @BindView(R.id.buttonCall)
     ImageButton mButtonCall;
 
-    String nameContact, numberPhoneContact;
+    Contact contact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +47,10 @@ public class DetailContactActivity extends NorsoidActivity {
         setContentView(R.layout.activity_detail_contact);
 
         Intent intent = getIntent();
-        nameContact = intent.getStringExtra("CONTACT_NAME");
-        numberPhoneContact = intent.getStringExtra("CONTACT_PHONE");
+        contact = intent.getParcelableExtra("CONTACT");
 
-        mNameContact.setText(nameContact.toString());
-        mNumberPhoneContact.setText(numberPhoneContact.toString());
+        mNameContact.setText(contact.getName());
+        mNumberPhoneContact.setText(contact.getNumberPhone());
 
         mButtonCall.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +84,7 @@ public class DetailContactActivity extends NorsoidActivity {
 
         } else {
             Intent callIntent = new Intent(Intent.ACTION_CALL);
-            callIntent.setData(Uri.parse("tel:" + numberPhoneContact));
+            callIntent.setData(Uri.parse("tel:" + contact.getNumberPhone()));
             startActivity(callIntent);
         }
     }

@@ -24,6 +24,8 @@ public class ContactHolder extends NorsoidViewHolder {
     @BindView(R.id.numberPhoneContact)
     TextView numberTextView;
 
+    private Contact contact;
+
 
     public ContactHolder(View itemView) {
         super(itemView);
@@ -34,8 +36,8 @@ public class ContactHolder extends NorsoidViewHolder {
             public void onClick(View v) {
 
                 Intent intent = new Intent(v.getContext(), DetailContactActivity.class);
-                intent.putExtra("CONTACT_NAME", nameTextView.getText().toString());
-                intent.putExtra("CONTACT_PHONE", numberTextView.getText().toString());
+                intent.putExtra("CONTACT", getContact());
+
                 v.getContext().startActivity(intent);
 
             }
@@ -45,5 +47,12 @@ public class ContactHolder extends NorsoidViewHolder {
     public void bind(Contact contact){
         nameTextView.setText(contact.getName());
         numberTextView.setText(contact.getNumberPhone());
+        this.contact = contact;
     }
+
+
+    public Contact getContact() {
+        return contact;
+    }
+
 }
