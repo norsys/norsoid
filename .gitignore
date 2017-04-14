@@ -18,6 +18,7 @@ out/
 .idea/
 workspace.xml
 
+# Gradle files
 .gradle/
 gradle/
 gradlew
@@ -26,6 +27,13 @@ gradlew.bat
 local.properties
 *.iml
 *-report.txt
+*.log
 build/
 captures/
 .externalNativeBuild
+
+# Android Studio captures folder
+captures/
+
+# Keystore files
+*.jks
