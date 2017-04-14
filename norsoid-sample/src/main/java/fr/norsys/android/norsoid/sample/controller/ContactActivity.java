@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -38,7 +39,7 @@ public class ContactActivity extends NorsoidActivity {
     @BindView(R.id.listContact)
     RecyclerView mListContact;
 
-    List<Contact> listContact = new ArrayList<Contact>();
+    List<Contact> listContact = new ArrayList<>();
     ContactAdapter contactAdapter;
 
 

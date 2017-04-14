@@ -18,12 +18,11 @@ public class NorsoidApplication extends Application {
     public void onCreate() {
         super.onCreate();
         sApplication = this;
-
         // Initialize Realm. Should only be done once when the application starts.
         Realm.init(this);
     }
 
-    public static NorsoidApplication app() {
+    protected static NorsoidApplication app() {
         return sApplication;
     }
 
@@ -34,28 +33,27 @@ public class NorsoidApplication extends Application {
         return this.mNorsoidComponent;
     }
 
-    protected NorsoidComponent createNorsoidComponent() {
+    private NorsoidComponent createNorsoidComponent() {
         return DaggerNorsoidComponent.builder().norsoidModule(new NorsoidModule(this)).build();
     }
 
-    public void inject(Object obj) {
+    protected void inject(Object obj) {
         if (obj != null) {
-            this.invokeInject(getNorsoidComponent(), obj, obj.getClass());
+            inject(getNorsoidComponent(), obj, obj.getClass());
         }
     }
 
-    private void invokeInject(NorsoidComponent baseComponent, Object obj, Class objClass) {
+    private void inject(NorsoidComponent baseComponent, Object obj, Class objClass) {
         try {
-            Method e = baseComponent.getClass().getMethod("inject", new Class[]{objClass});
-            e.invoke(baseComponent, new Object[]{obj});
-        } catch (NoSuchMethodException var5) {
+            Method e = baseComponent.getClass().getMethod("inject", objClass);
+            e.invoke(baseComponent, obj);
+        } catch (NoSuchMethodException e) {
             if (objClass.getSuperclass() == null) {
-                throw new IllegalStateException("inject(" + obj.getClass().getSimpleName() + ") is not declared in your BaseComponent", var5);
+                throw new IllegalStateException("inject(" + obj.getClass().getSimpleName() + ") is not declared in your Component", e);
             }
-
-            this.invokeInject(baseComponent, obj, objClass.getSuperclass());
-        } catch (Exception var6) {
-            throw new RuntimeException("Can\'t inject in " + obj.getClass() + "  with your BaseComponent ", var6);
+            inject(baseComponent, obj, objClass.getSuperclass());
+        } catch (Exception e) {
+            throw new RuntimeException("Can\'t inject in " + obj.getClass() + "  with your Component ", e);
         }
     }
 }

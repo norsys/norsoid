@@ -1,7 +1,12 @@
 buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
     dependencies {
-        classpath "com.neenbedankt.gradle.plugins:android-apt:$APT_VERSION"
         classpath "io.realm:realm-gradle-plugin:$REALM_VERSION"
+        classpath "me.tatarka:gradle-retrolambda:$RETROLAMBDA_VERSION"
+        classpath "io.fabric.tools:gradle:$FABRIC_TOOLS_VERSION"
     }
 }
 
@@ -15,12 +20,12 @@ group = NORSOID_GROUP
 uploadArchives {
     repositories {
         // TODO :  uniquement pour les tests en local
-        //mavenDeployer { repository(url: 'file:///Users/mehdibrahmi/.m2/repository') }
-        mavenDeployer {
+        mavenDeployer { repository(url: "file://${System.properties['user.home']}/.m2/repository") }
+        /*mavenDeployer {
             repository(url: NORSYS_REPOSITORY_URL) {
                 authentication(userName: nexusNorsysUser, password: nexusNorsysPassword)
             }
-        }
+        }*/
     }
 }
 
@@ -47,13 +52,17 @@ task generateNorsoidConstants(type: Copy) {
 }
 assemble.dependsOn generateNorsoidConstants
 
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
 
 dependencies {
     compile gradleApi()
     compile localGroovy()
     compile "com.android.tools.build:gradle:$GRADLE_ANDROID_VERSION"
-    compile "com.neenbedankt.gradle.plugins:android-apt:$APT_VERSION"
     compile "io.realm:realm-gradle-plugin:$REALM_VERSION"
+    compile "me.tatarka:gradle-retrolambda:$RETROLAMBDA_VERSION"
+    compile "io.fabric.tools:gradle:$FABRIC_TOOLS_VERSION"
 }
 
 // Make sure all code is compiled, tested and checked before uploadArchives.

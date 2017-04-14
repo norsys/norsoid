@@ -1,9 +1,6 @@
 Properties properties = new Properties()
 properties.load(new FileInputStream(file('norsoid.properties')))
-properties.each { prop ->
-    ext.set(prop.key, prop.value)
-}
-
+properties.each { prop -> ext.set(prop.key, prop.value) }
 
 
 buildscript {
@@ -11,8 +8,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        //classpath "com.android.tools.build:gradle:$GRADLE_ANDROID_VERSION"
-        classpath "com.android.tools.build:gradle:2.2.2"
+        classpath 'com.android.tools.build:gradle:2.3.1'
     }
 }
 

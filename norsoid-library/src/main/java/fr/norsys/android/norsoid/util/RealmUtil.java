@@ -15,13 +15,7 @@ public class RealmUtil {
             throw new IllegalArgumentException("transaction cannot be null.");
         }
 
-        final Realm realm = Realm.getDefaultInstance();
-        realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                transaction.execute(realm);
-            }
-        });
+        Realm.getDefaultInstance().executeTransaction(transaction::execute);
     }
 
 

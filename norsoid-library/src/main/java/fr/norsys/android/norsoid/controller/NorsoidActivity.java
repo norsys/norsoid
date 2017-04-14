@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -14,7 +13,7 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import fr.norsys.android.norsoid.config.NorsoidApplication;
+import fr.norsys.android.norsoid.config.Norsoid;
 
 public class NorsoidActivity extends AppCompatActivity {
 
@@ -25,7 +24,7 @@ public class NorsoidActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        NorsoidApplication.app().inject(this);
+        Norsoid.inject(this);
     }
 
     @Override

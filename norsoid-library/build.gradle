@@ -1,14 +1,14 @@
 buildscript {
     dependencies {
-        classpath "com.neenbedankt.gradle.plugins:android-apt:$APT_VERSION"
         classpath "io.realm:realm-gradle-plugin:$REALM_VERSION"
+        classpath "me.tatarka:gradle-retrolambda:$RETROLAMBDA_VERSION"
     }
 }
 
 apply plugin: 'com.android.library'
-apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'maven'
 apply plugin: 'realm-android'
+apply plugin: 'me.tatarka.retrolambda'
 
 group = NORSOID_GROUP
 version = NORSOID_VERSION
@@ -16,12 +16,12 @@ version = NORSOID_VERSION
 uploadArchives {
     repositories {
         // TODO :  uniquement pour les tests en local
-        //mavenDeployer { repository(url: 'file:///Users/mehdibrahmi/.m2/repository') }
-        mavenDeployer {
+        mavenDeployer { repository(url: "file://${System.properties['user.home']}/.m2/repository") }
+        /*mavenDeployer {
             repository(url: NORSYS_REPOSITORY_URL) {
                 authentication(userName: nexusNorsysUser, password: nexusNorsysPassword)
             }
-        }
+        }*/
     }
 }
 
@@ -36,14 +36,24 @@ android {
         versionName NORSOID_VERSION
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
     }
 
+    dexOptions {
+        javaMaxHeapSize "4g" //specify the heap size for the dex process
+    }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     lintOptions {
@@ -68,7 +78,7 @@ dependencies {
 
     // Dagger 2
     compile "com.google.dagger:dagger:$DAGGER_VERSION"
-    apt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+    annotationProcessor "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
 
     // Retrofit 2
     compile "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
@@ -76,7 +86,7 @@ dependencies {
 
     // Butter Knife
     compile "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
-    apt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
 
     // EventBus
     compile "org.greenrobot:eventbus:$EVENTBUS_VERSION"
@@ -89,7 +99,6 @@ dependencies {
 
     // Lombok
     provided "org.projectlombok:lombok:$LOMBOK_VERSION"
-    apt "org.projectlombok:lombok:$LOMBOK_VERSION"
 
     testCompile "junit:junit:4.12"
 
